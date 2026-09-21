@@ -1,10 +1,190 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>A Little Secret</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Little Secret</title>
+
+<style>
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: radial-gradient(circle at top, #252536, #09090f 60%, #030306);
+  color: white;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.stars {
+  position: fixed;
+  inset: 0;
+  background-image:
+    radial-gradient(white 1px, transparent 1px),
+    radial-gradient(#aaa 1px, transparent 1px);
+  background-size: 70px 70px, 110px 110px;
+  opacity: 0.25;
+  animation: move 20s linear infinite;
+}
+
+@keyframes move {
+  from { transform: translateY(0); }
+  to { transform: translateY(-70px); }
+}
+
+.card {
+  position: relative;
+  width: 90%;
+  max-width: 420px;
+  padding: 38px 25px;
+  text-align: center;
+  background: rgba(20,20,30,0.88);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 25px;
+  box-shadow: 0 0 40px rgba(150,100,255,0.15);
+  z-index: 2;
+}
+
+.small {
+  color: #aaa;
+  font-size: 13px;
+  letter-spacing: 3px;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 28px;
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+
+p {
+  color: #cfcfd8;
+  line-height: 1.7;
+  font-size: 16px;
+}
+
+button {
+  margin: 10px 5px;
+  padding: 13px 25px;
+  border: 1px solid #777;
+  border-radius: 30px;
+  background: transparent;
+  color: white;
+  font-size: 15px;
+}
+
+button:active {
+  transform: scale(0.95);
+}
+
+.hidden {
+  display: none;
+}
+
+.heart {
+  font-size: 45px;
+  margin: 15px;
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  50% { transform: scale(1.15); }
+}
+
+.final {
+  color: #f2dfff;
+  font-size: 24px;
+  line-height: 1.6;
+}
+
+.fade {
+  animation: fade 0.8s;
+}
+
+@keyframes fade {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+</style>
 </head>
+
 <body>
-  <h1>Someone left you a little secret...</h1>
-  <p>Are you curious?</p>
+
+<div class="stars"></div>
+
+<div class="card">
+
+  <div id="page1" class="fade">
+    <div class="small">A LITTLE SECRET</div>
+    <h1>Someone left you something...</h1>
+    <p>But you have to be curious enough to open it.</p>
+    <button onclick="nextPage(1)">Open it</button>
+  </div>
+
+  <div id="page2" class="hidden">
+    <div class="small">QUESTION 01</div>
+    <h1>Before you continue...</h1>
+    <p>
+      If someone had been secretly thinking about you
+      for a while...
+      would you want to know?
+    </p>
+    <button onclick="nextPage(2)">Yes</button>
+    <button onclick="nextPage(2)">Maybe...</button>
+  </div>
+
+  <div id="page3" class="hidden">
+    <div class="small">QUESTION 02</div>
+    <h1>One more thing.</h1>
+    <p>
+      What if that person is someone
+      you already know?
+    </p>
+    <button onclick="nextPage(3)">I'm listening...</button>
+  </div>
+
+  <div id="page4" class="hidden">
+    <div class="small">ALMOST THERE</div>
+    <h1>Don't try to guess.</h1>
+    <p>
+      Just keep going.<br>
+      You'll know soon enough.
+    </p>
+    <button onclick="nextPage(4)">Continue</button>
+  </div>
+
+  <div id="page5" class="hidden">
+    <div class="heart">♡</div>
+    <div class="small">THE SECRET</div>
+    <p class="final">
+      You probably know<br>
+      who this is.
+      <br><br>
+      It's me.
+      <br><br>
+      I like you. 🤍
+    </p>
+  </div>
+
+</div>
+
+<script>
+function nextPage(current) {
+  document.getElementById("page" + current).classList.add("hidden");
+
+  let next = current + 1;
+
+  document.getElementById("page" + next).classList.remove("hidden");
+  document.getElementById("page" + next).classList.add("fade");
+}
+</script>
+
 </body>
 </html>
